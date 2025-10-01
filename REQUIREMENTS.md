@@ -34,6 +34,7 @@ O **GenAI Eng Prompt** é uma aplicação web que otimiza prompts utilizando as 
 - **Framework**: Express.js
 - **Runtime**: Node.js
 - **API**: RESTful
+- **Servidor de arquivos estáticos**: Serve o frontend React buildado na raiz (`/`)
 - Integração com múltiplos provedores de IA via SDKs oficiais
 - Sistema de configuração flexível (JSON + .env)
 - Middleware para CORS, validação e tratamento de erros
@@ -88,15 +89,21 @@ O sistema deve suportar integração com os seguintes provedores:
 - **Localização**: `/etc/rapport/genai-eng-prompt/config.json`
 - **Formato**: JSON
 - **Conteúdo obrigatório**:
-  - Engine a ser utilizada
-  - Credenciais de acesso (API keys)
-  - URL da API RESTful (quando aplicável)
-  - Flag indicando se gera embeddings
+  - **Porta do servidor**: Porta onde o backend Express irá executar (padrão: 3010)
+  - **Engine a ser utilizada**: Provedor de IA ativo
+  - **Credenciais de acesso**: API keys dos provedores
+  - **URL da API RESTful**: Quando aplicável (Ollama, OpenWebUI, etc.)
+  - **Flag indicando se gera embeddings**: Para provedores que suportam
 
 ### 5.2 Configuração Local (Desenvolvimento)
 - **Arquivo**: `.env` (na raiz do projeto)
 - **Prioridade**: Se existir, sobrescreve as configurações de `/etc/rapport/genai-eng-prompt/config.json`
 - **Uso**: Desenvolvimento e testes locais
+- **Variáveis principais**:
+  - `PORT`: Porta do servidor (ex: 3010)
+  - `NODE_ENV`: Ambiente (development, production)
+  - `PROVIDER`: Provedor de IA ativo
+  - `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, etc.
 
 ### 5.3 Arquivo de Propagandas
 - **Localização**: `/etc/rapport/genai-eng-prompt/ads.conf`
@@ -203,10 +210,25 @@ O sistema deve suportar integração com os seguintes provedores:
 - CORS configurado adequadamente
 - HTTPS em produção
 
-### 6.4 DevOps
+### 6.4 DevOps e Deploy
+
+#### Estrutura de Deploy
+- **Desenvolvimento**: Frontend (Vite dev server - porta 5173) + Backend (porta configurável, padrão 3010)
+- **Produção**: Backend Express serve frontend e API (porta configurável)
+  - Porta definida em `config.json` ou variável de ambiente `PORT`
+  - Frontend buildado (`npm run build`) copiado para `backend/public`
+  - Express serve arquivos estáticos na raiz: `https://localhost:{PORT}/`
+  - API acessível em: `https://localhost:{PORT}/api/*`
+
+#### Build e Deploy
+- Frontend: `npm run build` gera arquivos em `frontend/dist`
+- Arquivos buildados copiados para `backend/public` (ou `backend/dist/public`)
+- Backend Express configurado com `express.static()` para servir `public`
+- Rota catch-all (`/*`) retorna `index.html` para suporte a SPA
+
+#### Containerização
 - **Docker**: Containerização da aplicação
 - **Docker Compose**: Orquestração de containers
-- **Nginx**: Servidor web para frontend em produção
 - **CI/CD**: Pipeline automatizado (GitHub Actions, GitLab CI, etc.)
 
 ### 6.5 Testes

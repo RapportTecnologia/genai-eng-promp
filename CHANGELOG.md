@@ -7,22 +7,16 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ## [Unreleased]
 
-### Planejado
-- Sistema de otimização de prompts com IA
-- Sugestões em tempo real durante digitação
-- Suporte a múltiplos provedores de IA (OpenAI, Anthropic, Ollama, etc.)
-- Sistema de propagandas configurável
-- Interface responsiva com React
-- API RESTful com Express
-- Contador de tokens
-- Sistema de cópia para área de transferência
-- Containerização com Docker
+### Em Desenvolvimento
+- Testes unitários e de integração
+- Sistema de cache para otimização
+- Histórico de prompts otimizados
+- Métricas e analytics
 
 ---
 
 ## [0.1.0] - 2025-10-01
 
-### Adicionado
 - Documentação inicial do projeto
 - `REQUIREMENTS.md` - Especificação completa de requisitos
 - `PLAN.md` - Plano de execução detalhado
@@ -43,6 +37,67 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
   - Frames em tom sobre tom laranja
   - Texto branco para contraste
   - Especificações de design para componentes
+- Arquitetura de deploy:
+  - Backend Express serve frontend buildado na raiz
+  - Porta configurável via `config.json` ou variável de ambiente `PORT` (padrão: 3010)
+  - Frontend buildado com `npm run build` copiado para `backend/public`
+  - API acessível em `https://localhost:{PORT}/api/*`
+  - Dockerfile multi-stage para build integrado
+- Sistema de configuração:
+  - Porta do servidor configurável
+  - Suporte a variáveis de ambiente (.env)
+  - Prioridade: .env > config.json
+- Sistema completo de configuração com suporte a .env e config.json
+- Abstração de engines de IA com classe base
+- Engine OpenAI com suporte a tiktoken para contagem precisa de tokens
+- Engine Anthropic Claude
+- Engine Ollama (local)
+- Engine Perplexity
+- Suporte a APIs compatíveis com OpenAI (OpenRouter, OpenWebUI, GenerAtiva)
+- Serviço de otimização de prompts com prompt system especializado
+- Serviço de sugestões em tempo real
+- Serviço de gerenciamento de propagandas
+- API RESTful completa com endpoints:
+  - POST /api/optimize - Otimização de prompts
+  - POST /api/suggest - Sugestões em tempo real
+  - GET /api/ads - Propagandas aleatórias
+  - GET /api/health - Health check
+  - GET /api/providers - Lista de provedores
+- Middleware de validação com express-validator
+- Middleware de tratamento de erros
+- Sistema de retry com axios-retry
+- Servidor Express serve frontend buildado em produção
+- Porta padrão alterada para 3010
+- Aplicação React completa com Vite
+- Componente PromptEditor com sugestões em tempo real
+- Componente OptimizedPromptViewer com contador de tokens
+- Componente AdsBanner com carregamento dinâmico
+- Serviço de API com axios e interceptors
+- Interface responsiva com TailwindCSS
+- Paleta de cores laranja e marrom conforme especificação
+- Sistema de cópia para área de transferência
+- Estados de loading e tratamento de erros
+- Integração completa com backend
+
+#### DevOps
+- Dockerfile multi-stage para build otimizado
+- docker-compose.yml com configuração completa
+- Script de build integrado (build:prod)
+- .dockerignore para otimização de build
+- .gitignore configurado
+- README.md completo com documentação
+
+#### Configuração
+- Arquivos de exemplo: config.example.json e ads.example.conf
+- .env.example com todas as variáveis de ambiente
+- Suporte a configuração via arquivo ou variáveis de ambiente
+- Prioridade: .env > config.json
+
+### Modificado
+- Porta padrão do servidor alterada de 3000 para 3010
+- Backend agora serve frontend buildado na raiz (/)
+- API acessível em /api/*
+
 
 ---
 
@@ -80,4 +135,4 @@ Versões de pré-lançamento podem ser denotadas anexando um hífen e uma série
 ---
 
 [Unreleased]: https://github.com/seu-usuario/genai-eng-prompt/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/seu-usuario/genai-eng-prompt/releases/tag/v0.1.0
+[0.1.0]: https://github.com/rapporttecnologia/genai-eng-prompt/releases/tag/v0.1.0

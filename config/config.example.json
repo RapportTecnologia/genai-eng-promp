@@ -1,0 +1,51 @@
+{
+  "provider": "openai",
+  "providers": {
+    "openai": {
+      "apiKey": "sk-...",
+      "engine": "openai",
+      "model": "gpt-4",
+      "supportsEmbeddings": true
+    },
+    "anthropic": {
+      "apiKey": "sk-ant-...",
+      "engine": "anthropic",
+      "model": "claude-3-opus-20240229",
+      "supportsEmbeddings": false
+    },
+    "ollama": {
+      "url": "http://localhost:11434",
+      "engine": "ollama",
+      "model": "llama2",
+      "supportsEmbeddings": true
+    },
+    "openrouter": {
+      "apiKey": "sk-or-...",
+      "engine": "openai",
+      "baseURL": "https://openrouter.ai/api/v1",
+      "model": "openai/gpt-4",
+      "supportsEmbeddings": false
+    },
+    "perplexity": {
+      "apiKey": "pplx-...",
+      "engine": "perplexity",
+      "baseURL": "https://api.perplexity.ai",
+      "model": "pplx-70b-online",
+      "supportsEmbeddings": false
+    },
+    "openwebui": {
+      "apiKey": "sk-...",
+      "engine": "openai",
+      "baseURL": "http://localhost:8080/api/v1",
+      "model": "gpt-4",
+      "supportsEmbeddings": true
+    },
+    "generativa": {
+      "apiKey": "sk-...",
+      "engine": "openai",
+      "baseURL": "https://api.generativa.com/v1",
+      "model": "gpt-4",
+      "supportsEmbeddings": true
+    }
+  }
+}

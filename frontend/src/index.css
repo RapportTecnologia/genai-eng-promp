@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-brown-400;
+  }
+  
+  body {
+    @apply bg-primary-500 text-white font-sans antialiased;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .frame {
+    @apply rounded-lg border-2 border-brown-400 shadow-lg p-6;
+  }
+
+  .frame-light {
+    @apply frame bg-primary-400;
+  }
+
+  .frame-medium {
+    @apply frame bg-primary-600;
+  }
+
+  .frame-dark {
+    @apply frame bg-primary-700;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-primary-700 text-white rounded-lg border-2 border-brown-400 
+           hover:bg-primary-800 hover:border-brown-500 transition-all duration-200 
+           font-semibold shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-primary-600 text-white rounded-lg border border-brown-400 
+           hover:bg-primary-700 transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-primary-400/50 text-white rounded-lg border-2 border-brown-400 
+           placeholder:text-white/60 focus:outline-none focus:border-brown-500 
+           focus:ring-2 focus:ring-brown-400/50 transition-all;
+  }
+
+  .textarea-field {
+    @apply input-field resize-none min-h-[150px];
+  }
+}

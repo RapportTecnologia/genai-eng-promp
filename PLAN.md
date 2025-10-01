@@ -63,6 +63,10 @@ genai-eng-prompt/
 │   │   │   └── validator.js
 │   │   └── utils/
 │   │       └── tokenCounter.js
+│   ├── public/          (frontend buildado copiado aqui)
+│   │   ├── index.html
+│   │   ├── assets/
+│   │   └── ...
 │   ├── server.js
 │   └── package.json
 ├── frontend/
@@ -102,13 +106,19 @@ genai-eng-prompt/
 
 - [ ] Criar módulo de leitura de configuração
 - [ ] Implementar prioridade: `.env` > `/etc/rapport/genai-eng-prompt/config.json`
-- [ ] Validar configurações obrigatórias
+- [ ] Validar configurações obrigatórias (porta, provider, credenciais)
+- [ ] Implementar leitura da porta do servidor (PORT)
 - [ ] Criar arquivo de exemplo `config.example.json`
+- [ ] Criar arquivo de exemplo `.env.example`
 - [ ] Documentar estrutura de configuração
 
 **Estrutura do config.json**:
 ```json
 {
+  "server": {
+    "port": 3010,
+    "host": "localhost"
+  },
   "provider": "openai",
   "providers": {
     "openai": {
@@ -138,6 +148,15 @@ genai-eng-prompt/
     }
   }
 }
+```
+
+**Exemplo de .env**:
+```env
+PORT=3010
+NODE_ENV=development
+PROVIDER=openai
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 ### 2.2 Abstração de Engines
@@ -174,7 +193,9 @@ genai-eng-prompt/
 **Duração estimada**: 2-3 dias
 
 - [ ] Configurar Express server com middleware básico
-- [ ] Implementar CORS com configuração adequada
+- [ ] Configurar `express.static()` para servir `public/` na raiz
+- [ ] Implementar rota catch-all (`/*`) que retorna `index.html` (SPA support)
+- [ ] Implementar CORS com configuração adequada (desenvolvimento)
 - [ ] **POST** `/api/optimize` - Otimizar prompt completo
   - Body: `{ "prompt": "texto do prompt" }`
   - Response: `{ "optimizedPrompt": "...", "tokens": 150 }`
@@ -281,6 +302,16 @@ genai-eng-prompt/
 - [ ] Otimizar performance
 - [ ] Testar responsividade em diferentes dispositivos
 
+### 3.7 Build e Integração com Backend
+**Duração estimada**: 1 dia
+
+- [ ] Configurar script de build no `package.json` do frontend
+- [ ] Criar script para copiar `frontend/dist` para `backend/public`
+- [ ] Configurar `vite.config.js` com base path correto
+- [ ] Testar build de produção
+- [ ] Criar script npm para build completo (frontend + cópia)
+- [ ] Documentar processo de build no README
+
 ---
 
 ## Fase 4: Integração e Testes
@@ -336,15 +367,18 @@ genai-eng-prompt/
 ### 5.2 Containerização
 **Duração estimada**: 2 dias
 
-- [ ] Criar Dockerfile para backend (Node.js)
-  - Multi-stage build para otimização
+- [ ] Criar Dockerfile multi-stage
+  - Stage 1: Build do frontend (Node.js)
+  - Stage 2: Copiar frontend buildado + backend (Node.js)
   - Usar node:alpine como base
-- [ ] Criar Dockerfile para frontend (Nginx)
-  - Build da aplicação React
-  - Servir com Nginx
+- [ ] Configurar Dockerfile:
+  - Instalar dependências do frontend e fazer build
+  - Copiar arquivos buildados para `backend/public`
+  - Instalar dependências do backend
+  - Expor porta configurável (padrão 3010)
 - [ ] Configurar docker-compose.yml
-  - Serviço backend (porta 3000)
-  - Serviço frontend (porta 80)
+  - Serviço único (backend + frontend integrados)
+  - Porta configurável via variável de ambiente
   - Volumes para configuração
 - [ ] Testar build e execução em containers
 - [ ] Otimizar tamanho das imagens
@@ -455,10 +489,14 @@ genai-eng-prompt/
 1. ✅ Definir stack tecnológica final
 2. ✅ Criar estrutura de diretórios
 3. ✅ Configurar repositório Git
-4. ✅ Inicializar projeto backend
-5. ✅ Inicializar projeto frontend
-6. ✅ Criar arquivos de exemplo de configuração
-7. ✅ Começar desenvolvimento do sistema de configuração
+4. ⬜ Inicializar projeto backend
+   - Configurar Express com `express.static('public')`
+   - Implementar rota catch-all para SPA
+5. ⬜ Inicializar projeto frontend
+   - Configurar Vite com proxy para backend em desenvolvimento
+   - Configurar script de build e cópia
+6. ⬜ Criar arquivos de exemplo de configuração
+7. ⬜ Começar desenvolvimento do sistema de configuração
 
 ---
 
