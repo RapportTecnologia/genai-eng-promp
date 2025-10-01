@@ -9,6 +9,7 @@ import adsRoutes from './src/routes/ads.routes.js';
 import { errorHandler, notFoundHandler } from './src/middleware/errorHandler.js';
 import promptService from './src/services/prompt.service.js';
 import EngineFactory from './src/engines/index.js';
+import configLoader from './src/config/config.loader.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -70,6 +71,30 @@ app.get('/api/providers', (req, res) => {
     res.status(500).json({
       success: false,
       error: error.message
+    });
+  }
+});
+
+/**
+ * GET /api/config
+ * Retorna APENAS configurações públicas e seguras
+ * NUNCA expõe API keys, senhas ou informações sensíveis
+ */
+app.get('/api/config', (req, res) => {
+  try {
+    const gtagId = configLoader.getGtagId();
+    
+    // Retorna APENAS dados públicos e seguros
+    res.json({
+      success: true,
+      data: {
+        gtagId: gtagId || null
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao carregar configurações públicas'
     });
   }
 });
@@ -145,6 +170,17 @@ process.on('unhandledRejection', (reason, promise) => {
 process.on('uncaughtException', (error) => {
   console.error('Uncaught Exception:', error);
   process.exit(1);
+});
+
+// Encerra monitoramento de arquivos ao finalizar processo
+process.on('SIGINT', () => {
+  console.log('\n\nEncerrando servidor...');
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  console.log('\n\nEncerrando servidor...');
+  process.exit(0);
 });
 
 export default app;

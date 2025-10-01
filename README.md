@@ -272,6 +272,13 @@ Crie `/etc/rapport/genai-eng-prompt/ads.conf`:
 ]
 ```
 
+**Monitoramento Automático**: O serviço monitora automaticamente o arquivo `ads.conf` e recarrega as propagandas sempre que ele for modificado, sem necessidade de reiniciar o servidor.
+
+Para recarregar manualmente via API:
+```bash
+curl -X POST http://localhost:3010/api/ads/reload
+```
+
 ## 🎨 Personalização
 
 ### Cores (TailwindCSS)

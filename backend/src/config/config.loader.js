@@ -55,6 +55,11 @@ class ConfigLoader {
       providers: {}
     };
 
+    // Google Analytics
+    if (process.env.GTAG_ID) {
+      config.gtagId = process.env.GTAG_ID;
+    }
+
     // OpenAI
     if (process.env.OPENAI_API_KEY) {
       config.providers.openai = {
@@ -188,6 +193,13 @@ class ConfigLoader {
       name,
       ...this.config.providers[name]
     }));
+  }
+
+  /**
+   * Retorna o Google Analytics ID
+   */
+  getGtagId() {
+    return this.config?.gtagId || null;
   }
 
   /**

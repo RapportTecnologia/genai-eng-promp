@@ -101,6 +101,20 @@ const apiService = {
     } catch (error) {
       throw error;
     }
+  },
+
+  /**
+   * Busca configurações públicas (como Google Analytics ID)
+   * @returns {Promise<object>} - Configurações públicas
+   */
+  async getConfig() {
+    try {
+      const response = await api.get('/config');
+      return response.data.data;
+    } catch (error) {
+      console.error('Erro ao buscar configurações:', error);
+      return {};
+    }
   }
 };
 

@@ -20,13 +20,8 @@
     "imagePath": "https://via.placeholder.com/300x150/FFA500/FFFFFF?text=E-book"
   },
   {
-    "titulo": "Exemplo com Imagem Local",
-    "link": "https://exemplo.com/local",
-    "imagePath": "/var/www/images/banner.png"
-  },
-  {
-    "titulo": "Exemplo com Caminho Relativo",
-    "link": "https://exemplo.com/relativo",
-    "imagePath": "public/images/logo.png"
+    "titulo": "Comunidade de IA",
+    "link": "https://exemplo.com/comunidade",
+    "imagePath": "https://via.placeholder.com/300x150/FF8C42/FFFFFF?text=Comunidade"
   }
 ]
