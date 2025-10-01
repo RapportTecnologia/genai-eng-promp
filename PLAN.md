@@ -105,7 +105,7 @@ genai-eng-prompt/
 **Duração estimada**: 2-3 dias
 
 - [ ] Criar módulo de leitura de configuração
-- [ ] Implementar prioridade: `.env` > `/etc/rapport/genai-eng-prompt/config.json`
+- [ ] Implementar prioridade: `.env` > `/etc/genai-eng-prompt/config.json`
 - [ ] Validar configurações obrigatórias (porta, provider, credenciais)
 - [ ] Implementar leitura da porta do servidor (PORT)
 - [ ] Criar arquivo de exemplo `config.example.json`
@@ -213,7 +213,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 ### 2.6 Sistema de Propagandas
 **Duração estimada**: 1-2 dias
 
-- [ ] Criar módulo de leitura de `/etc/rapport/genai-eng-prompt/ads.conf`
+- [ ] Criar módulo de leitura de `/etc/genai-eng-prompt/ads.conf`
 - [ ] Implementar seleção aleatória de 3 propagandas
 - [ ] Validar estrutura do arquivo JSON
 - [ ] Criar arquivo de exemplo `ads.example.conf`

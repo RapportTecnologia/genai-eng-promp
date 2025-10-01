@@ -1,6 +1,7 @@
 {
   "provider": "openrouter",
   "gtagId": "G-S14KGKQY3L",
+  "maxTokens": 6000,
   "providers": {
     "openai": {
       "apiKey": "sk-proj-...",

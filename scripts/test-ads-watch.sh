@@ -9,7 +9,7 @@ echo "==================================="
 echo ""
 
 # Define o caminho do arquivo
-ADS_PATH="${ADS_CONFIG_PATH:-/etc/rapport/genai-eng-prompt/ads.conf}"
+ADS_PATH="${ADS_CONFIG_PATH:-/etc/genai-eng-prompt/ads.conf}"
 TEST_DIR="/tmp/genai-eng-prompt-test"
 TEST_ADS="$TEST_DIR/ads.conf"
 

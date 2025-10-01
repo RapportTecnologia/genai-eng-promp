@@ -14,8 +14,8 @@ Quando o servidor inicia, o `AdsService`:
 3. Exibe mensagem de confirmação no console
 
 ```
-✓ 5 propagandas carregadas de /etc/rapport/genai-eng-prompt/ads.conf
-👁 Monitorando alterações em /etc/rapport/genai-eng-prompt/ads.conf
+✓ 5 propagandas carregadas de /etc/genai-eng-prompt/ads.conf
+👁 Monitorando alterações em /etc/genai-eng-prompt/ads.conf
 ```
 
 ### 2. Detecção de Mudanças
@@ -27,8 +27,8 @@ O sistema monitora eventos de modificação no arquivo:
 - Exibe mensagem de confirmação
 
 ```
-📢 Arquivo /etc/rapport/genai-eng-prompt/ads.conf foi modificado. Recarregando propagandas...
-✓ 6 propagandas carregadas de /etc/rapport/genai-eng-prompt/ads.conf
+📢 Arquivo /etc/genai-eng-prompt/ads.conf foi modificado. Recarregando propagandas...
+✓ 6 propagandas carregadas de /etc/genai-eng-prompt/ads.conf
 ✓ Propagandas recarregadas automaticamente
 ```
 
@@ -49,7 +49,7 @@ O caminho do arquivo pode ser configurado via variável de ambiente:
 export ADS_CONFIG_PATH=/caminho/customizado/ads.conf
 ```
 
-Padrão: `/etc/rapport/genai-eng-prompt/ads.conf`
+Padrão: `/etc/genai-eng-prompt/ads.conf`
 
 ### Formato do Arquivo
 
@@ -189,7 +189,7 @@ npm start
 
 2. Em outro terminal, edite o arquivo:
 ```bash
-nano /etc/rapport/genai-eng-prompt/ads.conf
+nano /etc/genai-eng-prompt/ads.conf
 ```
 
 3. Adicione ou modifique uma propaganda e salve
@@ -220,7 +220,7 @@ class AdsService {
   constructor() {
     this.ads = [];
     this.watcher = null;
-    this.adsPath = process.env.ADS_CONFIG_PATH || '/etc/rapport/genai-eng-prompt/ads.conf';
+    this.adsPath = process.env.ADS_CONFIG_PATH || '/etc/genai-eng-prompt/ads.conf';
     this.loadAds();
     this.startWatching();
   }
@@ -263,14 +263,14 @@ cat ads.conf | jq .
 
 Mantenha backup antes de modificar:
 ```bash
-cp /etc/rapport/genai-eng-prompt/ads.conf /etc/rapport/genai-eng-prompt/ads.conf.bak
+cp /etc/genai-eng-prompt/ads.conf /etc/genai-eng-prompt/ads.conf.bak
 ```
 
 ### 3. Permissões
 
 Garanta que o processo Node.js tem permissão de leitura:
 ```bash
-chmod 644 /etc/rapport/genai-eng-prompt/ads.conf
+chmod 644 /etc/genai-eng-prompt/ads.conf
 ```
 
 ### 4. Monitoramento de Logs
@@ -288,8 +288,8 @@ tail -f /var/log/genai-eng-prompt.log
 
 **Solução**: 
 ```bash
-mkdir -p /etc/rapport/genai-eng-prompt
-cp config/ads.example.conf /etc/rapport/genai-eng-prompt/ads.conf
+mkdir -p /etc/genai-eng-prompt
+cp config/ads.example.conf /etc/genai-eng-prompt/ads.conf
 ```
 
 ### Problema: Mudanças não são detectadas
@@ -304,7 +304,7 @@ cp config/ads.example.conf /etc/rapport/genai-eng-prompt/ads.conf
 
 **Solução**: Valide o JSON:
 ```bash
-cat /etc/rapport/genai-eng-prompt/ads.conf | jq .
+cat /etc/genai-eng-prompt/ads.conf | jq .
 ```
 
 ### Problema: Propaganda não aparece mesmo estando no arquivo

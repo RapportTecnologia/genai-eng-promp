@@ -63,6 +63,7 @@ Retorne APENAS o prompt otimizado, sem explicações adicionais.`;
       }
 
       const systemPrompt = this.getOptimizationSystemPrompt();
+      const maxTokens = configLoader.getMaxTokens();
       
       // Gera prompt otimizado
       const optimizedPrompt = await this.engine.generateCompletion(
@@ -70,7 +71,7 @@ Retorne APENAS o prompt otimizado, sem explicações adicionais.`;
         systemPrompt,
         {
           temperature: 0.7,
-          maxTokens: 2000
+          maxTokens: maxTokens
         }
       );
 

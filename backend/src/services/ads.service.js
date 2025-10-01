@@ -109,6 +109,11 @@ class AdsService {
       return true;
     }
 
+    // Se for um caminho de API interno já processado, aceita
+    if (imagePath.startsWith('/api/ads/images/')) {
+      return true;
+    }
+
     // Se não for URL, deve ser um caminho de arquivo que existe no servidor
     try {
       // Resolve o caminho absoluto

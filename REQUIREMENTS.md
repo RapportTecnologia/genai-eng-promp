@@ -63,7 +63,7 @@ O **GenAI Eng Prompt** é uma aplicação web que otimiza prompts utilizando as 
   - Título
   - Imagem (com link clicável para o site do anunciante)
   - Link de destino
-- **Fonte de dados**: Arquivo `/etc/rapport/genai-eng-prompt/ads.conf` (formato JSON)
+- **Fonte de dados**: Arquivo `/etc/genai-eng-prompt/ads.conf` (formato JSON)
 
 ---
 
@@ -86,7 +86,7 @@ O sistema deve suportar integração com os seguintes provedores:
 ## 5. Configuração do Sistema
 
 ### 5.1 Arquivo de Configuração Principal
-- **Localização**: `/etc/rapport/genai-eng-prompt/config.json`
+- **Localização**: `/etc/genai-eng-prompt/config.json`
 - **Formato**: JSON
 - **Conteúdo obrigatório**:
   - **Porta do servidor**: Porta onde o backend Express irá executar (padrão: 3010)
@@ -97,7 +97,7 @@ O sistema deve suportar integração com os seguintes provedores:
 
 ### 5.2 Configuração Local (Desenvolvimento)
 - **Arquivo**: `.env` (na raiz do projeto)
-- **Prioridade**: Se existir, sobrescreve as configurações de `/etc/rapport/genai-eng-prompt/config.json`
+- **Prioridade**: Se existir, sobrescreve as configurações de `/etc/genai-eng-prompt/config.json`
 - **Uso**: Desenvolvimento e testes locais
 - **Variáveis principais**:
   - `PORT`: Porta do servidor (ex: 3010)
@@ -106,7 +106,7 @@ O sistema deve suportar integração com os seguintes provedores:
   - `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, etc.
 
 ### 5.3 Arquivo de Propagandas
-- **Localização**: `/etc/rapport/genai-eng-prompt/ads.conf`
+- **Localização**: `/etc/genai-eng-prompt/ads.conf`
 - **Formato**: JSON
 - **Estrutura**:
 ```json

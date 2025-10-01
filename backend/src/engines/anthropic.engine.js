@@ -20,7 +20,7 @@ class AnthropicEngine extends BaseEngine {
     try {
       const params = {
         model: this.model,
-        max_tokens: options.maxTokens || 2000,
+        max_tokens: options.maxTokens || 4000,
         messages: [
           {
             role: 'user',

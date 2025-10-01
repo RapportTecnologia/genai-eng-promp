@@ -38,7 +38,7 @@ COPY backend/ ./
 COPY --from=frontend-builder /app/frontend/dist ./public
 
 # Cria diretório para configurações
-RUN mkdir -p /etc/rapport/genai-eng-prompt
+RUN mkdir -p /etc/genai-eng-prompt
 
 # Expõe porta
 EXPOSE 3010

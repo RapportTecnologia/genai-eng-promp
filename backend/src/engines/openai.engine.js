@@ -63,7 +63,7 @@ class OpenAIEngine extends BaseEngine {
         model: this.model,
         messages,
         temperature: options.temperature || 0.7,
-        max_tokens: options.maxTokens || 2000,
+        max_tokens: options.maxTokens || 4000,
         ...options
       });
 

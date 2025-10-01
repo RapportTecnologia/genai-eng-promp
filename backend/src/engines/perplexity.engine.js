@@ -53,7 +53,7 @@ class PerplexityEngine extends BaseEngine {
         model: this.model,
         messages,
         temperature: options.temperature || 0.7,
-        max_tokens: options.maxTokens || 2000
+        max_tokens: options.maxTokens || 4000
       });
 
       return response.data.choices[0].message.content;

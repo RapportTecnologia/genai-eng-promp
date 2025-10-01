@@ -263,7 +263,7 @@ Lista provedores configurados.
 
 ### Arquivo de Configuração (Produção)
 
-Crie `/etc/rapport/genai-eng-prompt/config.json`:
+Crie `/etc/genai-eng-prompt/config.json`:
 
 ```json
 {
@@ -281,7 +281,7 @@ Crie `/etc/rapport/genai-eng-prompt/config.json`:
 
 ### Propagandas
 
-Crie `/etc/rapport/genai-eng-prompt/ads.conf`:
+Crie `/etc/genai-eng-prompt/ads.conf`:
 
 ```json
 [
