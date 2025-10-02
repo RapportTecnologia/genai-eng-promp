@@ -78,4 +78,37 @@ router.post('/reload', (req, res, next) => {
   }
 });
 
+/**
+ * GET /api/ads/images/:hash
+ * Serve imagens locais através do servidor
+ */
+router.get('/images/:hash', (req, res, next) => {
+  try {
+    const { hash } = req.params;
+    const imagePath = adsService.getLocalImagePath(hash);
+    
+    if (!imagePath) {
+      return res.status(404).json({
+        success: false,
+        message: 'Imagem não encontrada'
+      });
+    }
+    
+    // Envia o arquivo com cache headers
+    res.sendFile(imagePath, {
+      maxAge: '1d', // Cache de 1 dia
+      lastModified: true,
+      headers: {
+        'Cache-Control': 'public, max-age=86400'
+      }
+    }, (err) => {
+      if (err) {
+        next(err);
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default router;

@@ -9,15 +9,16 @@ import adsRoutes from './src/routes/ads.routes.js';
 import { errorHandler, notFoundHandler } from './src/middleware/errorHandler.js';
 import promptService from './src/services/prompt.service.js';
 import EngineFactory from './src/engines/index.js';
+import configLoader from './src/config/config.loader.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Carrega variáveis de ambiente do diretório raiz do projeto
-dotenv.config({ path: path.join(__dirname, '../.env') });
+// Carrega variáveis de ambiente
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT_BACKEND || 3011;
+const PORT = process.env.PORT || 3010;
 
 // Middleware
 app.use(cors());
@@ -70,6 +71,30 @@ app.get('/api/providers', (req, res) => {
     res.status(500).json({
       success: false,
       error: error.message
+    });
+  }
+});
+
+/**
+ * GET /api/config
+ * Retorna APENAS configurações públicas e seguras
+ * NUNCA expõe API keys, senhas ou informações sensíveis
+ */
+app.get('/api/config', (req, res) => {
+  try {
+    const gtagId = configLoader.getGtagId();
+    
+    // Retorna APENAS dados públicos e seguros
+    res.json({
+      success: true,
+      data: {
+        gtagId: gtagId || null
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Erro ao carregar configurações públicas'
     });
   }
 });
@@ -200,6 +225,18 @@ async function startServer() {
 
 // Inicia o servidor
 startServer();
+// Inicia servidor
+app.listen(PORT, () => {
+  console.log('');
+  console.log('═══════════════════════════════════════════════════════');
+  console.log('  GenAI Eng Prompt API');
+  console.log('═══════════════════════════════════════════════════════');
+  console.log(`  🚀 Servidor rodando em http://localhost:${PORT}`);
+  console.log(`  📝 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`  🤖 Provedor: ${promptService.getProviderInfo()?.name || 'N/A'}`);
+  console.log('═══════════════════════════════════════════════════════');
+  console.log('');
+});
 
 // Tratamento de erros não capturados
 process.on('unhandledRejection', (reason, promise) => {
@@ -209,6 +246,17 @@ process.on('unhandledRejection', (reason, promise) => {
 process.on('uncaughtException', (error) => {
   console.error('Uncaught Exception:', error);
   process.exit(1);
+});
+
+// Encerra monitoramento de arquivos ao finalizar processo
+process.on('SIGINT', () => {
+  console.log('\n\nEncerrando servidor...');
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  console.log('\n\nEncerrando servidor...');
+  process.exit(0);
 });
 
 export default app;

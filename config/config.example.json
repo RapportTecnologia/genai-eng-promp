@@ -1,8 +1,9 @@
 {
-  "provider": "openai",
+  "provider": "openrouter",
+  "gtagId": "G-S14KGKQY3L",
   "providers": {
     "openai": {
-      "apiKey": "sk-...",
+      "apiKey": "sk-proj-...",
       "engine": "openai",
       "model": "gpt-4",
       "embeddingModel": "text-embedding-3-large",
@@ -18,17 +19,30 @@
     "ollama": {
       "url": "http://localhost:11434",
       "engine": "ollama",
+<<<<<<< HEAD
       "model": "llama2",
+=======
+      "model": "granite3.3:8b",
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
       "embeddingModel": "granite-embedding:278m",
       "supportsEmbeddings": true
     },
     "openrouter": {
+<<<<<<< HEAD
       "apiKey": "sk-or-...",
       "engine": "openai",
       "baseURL": "https://openrouter.ai/api/v1",
       "model": "openai/gpt-4",
       "embeddingModel": "text-embedding-3-small",
       "supportsEmbeddings": true
+=======
+      "apiKey": "sk-or-v1-...",
+      "engine": "openai",
+      "baseURL": "https://openrouter.ai/api/v1",
+      "model": "google/gemini-2.5-pro",
+      "embeddingModel": "text-embedding-3-small",
+      "supportsEmbeddings": false
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
     },
     "perplexity": {
       "apiKey": "pplx-...",
@@ -49,9 +63,15 @@
     "generativa": {
       "apiKey": "sk-...",
       "engine": "openai",
+<<<<<<< HEAD
       "baseURL": "https://api.generativa.com/v1",
       "model": "gpt-4",
       "embeddingModel": "text-embedding-3-large",
+=======
+      "baseURL": "https://generativa.rapport.tec.br/v1",
+      "model": "gpt-4",
+      "embeddingModel": "granite-embedding:278m",
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
       "supportsEmbeddings": true
     }
   }

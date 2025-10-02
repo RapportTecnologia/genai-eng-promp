@@ -141,6 +141,7 @@ Sugira continuações relevantes:`;
       return false;
     }
   }
+<<<<<<< HEAD
 
   /**
    * Testa conexão com o provedor
@@ -205,6 +206,8 @@ Sugira continuações relevantes:`;
       };
     }
   }
+=======
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
 }
 
 export default OllamaEngine;

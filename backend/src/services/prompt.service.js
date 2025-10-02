@@ -17,11 +17,7 @@ class PromptService {
     try {
       const providerConfig = configLoader.getActiveProvider();
       configLoader.validateProvider(providerConfig);
-      
-      // Obtém todos os provedores para delegação de embeddings
-      const allProviders = configLoader.config.providers;
-      
-      this.engine = EngineFactory.createEngine(providerConfig, allProviders);
+      this.engine = EngineFactory.createEngine(providerConfig);
       console.log(`✓ Engine ${providerConfig.name} inicializada`);
     } catch (error) {
       console.error('Erro ao inicializar engine:', error);
@@ -52,6 +48,7 @@ Otimize o prompt do usuário aplicando essas técnicas. Mantenha a intenção or
 - Especificidade
 - Efetividade
 
+<<<<<<< HEAD
 IMPORTANTE: Retorne EXCLUSIVAMENTE o texto do prompt otimizado. NÃO inclua:
 - Explicações sobre as mudanças realizadas
 - Comentários ou observações
@@ -60,6 +57,9 @@ IMPORTANTE: Retorne EXCLUSIVAMENTE o texto do prompt otimizado. NÃO inclua:
 - Qualquer texto que não faça parte do prompt otimizado
 
 Responda SOMENTE com o prompt otimizado, nada mais.`;
+=======
+Retorne APENAS o prompt otimizado, sem explicações adicionais.`;
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
   }
 
   /**
@@ -81,7 +81,11 @@ Responda SOMENTE com o prompt otimizado, nada mais.`;
         systemPrompt,
         {
           temperature: 0.7,
+<<<<<<< HEAD
           maxTokens: 4096
+=======
+          maxTokens: 2000
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
         }
       );
 
@@ -152,6 +156,7 @@ Responda SOMENTE com o prompt otimizado, nada mais.`;
       return [];
     }
   }
+<<<<<<< HEAD
 
   /**
    * Testa conexão com o provedor ativo
@@ -177,6 +182,8 @@ Responda SOMENTE com o prompt otimizado, nada mais.`;
       };
     }
   }
+=======
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
 }
 
 // Singleton

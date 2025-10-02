@@ -58,6 +58,7 @@ class PerplexityEngine extends BaseEngine {
       return response.data.choices[0].message.content;
     } catch (error) {
       console.error('Erro ao gerar completion:', error);
+      throw new Error(`Erro na API Perplexity: ${error.message}`);
     }
   }
 
@@ -112,6 +113,7 @@ Sugira continuações relevantes:`;
 
     return true;
   }
+<<<<<<< HEAD
 
   /**
    * Testa conexão com o provedor
@@ -170,6 +172,8 @@ Sugira continuações relevantes:`;
       };
     }
   }
+=======
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
 }
 
 export default PerplexityEngine;

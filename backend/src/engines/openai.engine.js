@@ -122,6 +122,7 @@ Sugira continuações relevantes:`;
     }
 
     try {
+<<<<<<< HEAD
       // Usa o modelo configurado ou determina baseado no provedor (fallback)
       let embeddingModel = this.embeddingModel;
       
@@ -138,6 +139,10 @@ Sugira continuações relevantes:`;
 
       const response = await this.client.embeddings.create({
         model: embeddingModel,
+=======
+      const response = await this.client.embeddings.create({
+        model: 'text-embedding-ada-002',
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
         input: text
       });
 
@@ -177,6 +182,7 @@ Sugira continuações relevantes:`;
 
     return true;
   }
+<<<<<<< HEAD
 
   /**
    * Testa conexão com o provedor
@@ -236,6 +242,8 @@ Sugira continuações relevantes:`;
       };
     }
   }
+=======
+>>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
 }
 
 export default OpenAIEngine;

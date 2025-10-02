@@ -6,8 +6,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Carrega variáveis de ambiente do diretório raiz do projeto
-dotenv.config({ path: path.join(__dirname, '../../../.env') });
+// Carrega variáveis de ambiente
+dotenv.config();
 
 /**
  * Carrega configuração do sistema
@@ -54,6 +54,11 @@ class ConfigLoader {
       provider,
       providers: {}
     };
+
+    // Google Analytics
+    if (process.env.GTAG_ID) {
+      config.gtagId = process.env.GTAG_ID;
+    }
 
     // OpenAI
     if (process.env.OPENAI_API_KEY) {
@@ -196,6 +201,13 @@ class ConfigLoader {
       name,
       ...this.config.providers[name]
     }));
+  }
+
+  /**
+   * Retorna o Google Analytics ID
+   */
+  getGtagId() {
+    return this.config?.gtagId || null;
   }
 
   /**
