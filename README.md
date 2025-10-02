@@ -15,6 +15,7 @@ Uma aplicação web moderna para otimização de prompts utilizando as melhores 
 - 📋 **Copiar para Área de Transferência**: Cópia rápida do prompt otimizado
 - 🎨 **Interface Moderna**: Design responsivo com paleta laranja e marrom
 - 📢 **Sistema de Propagandas**: Exibição de anúncios configuráveis
+- 📈 **Google Analytics**: Integração nativa com rastreamento de eventos
 
 ## 🏗️ Arquitetura
 
@@ -61,9 +62,11 @@ npm install
 
 ### 3. Configure as variáveis de ambiente
 
+#### Backend
 Copie o arquivo de exemplo e configure suas API keys:
 
 ```bash
+cd backend
 cp .env.example .env
 ```
 
@@ -74,11 +77,29 @@ PORT=3010
 NODE_ENV=development
 PROVIDER=openai
 
+# Google Analytics (opcional)
+GTAG_ID=G-XXXXXXXXXX
+
 # OpenAI
 OPENAI_API_KEY=sk-...
 OPENAI_MODEL=gpt-4
 
 # Ou use outro provedor...
+```
+
+#### Frontend
+Configure o Google Analytics (opcional):
+
+```bash
+cd frontend
+cp .env.example .env
+```
+
+Edite o arquivo `.env`:
+
+```env
+# Google Analytics - será injetado no HTML durante o build
+VITE_GTAG_ID=G-XXXXXXXXXX
 ```
 
 ## 🚀 Execução
@@ -247,7 +268,7 @@ Lista provedores configurados.
 
 ### Arquivo de Configuração (Produção)
 
-Crie `/etc/rapport/genai-eng-prompt/config.json`:
+Crie `/etc/genai-eng-prompt/config.json`:
 
 ```json
 {
@@ -265,7 +286,7 @@ Crie `/etc/rapport/genai-eng-prompt/config.json`:
 
 ### Propagandas
 
-Crie `/etc/rapport/genai-eng-prompt/ads.conf`:
+Crie `/etc/genai-eng-prompt/ads.conf`:
 
 ```json
 [
@@ -283,6 +304,37 @@ Para recarregar manualmente via API:
 ```bash
 curl -X POST http://localhost:3010/api/ads/reload
 ```
+
+### Google Analytics
+
+O Google Analytics é injetado automaticamente no HTML durante o build do frontend através de um plugin Vite customizado.
+
+**Configuração:**
+
+1. Configure o `VITE_GTAG_ID` no arquivo `.env` do frontend:
+```env
+VITE_GTAG_ID=G-XXXXXXXXXX
+```
+
+2. Faça o build do frontend:
+```bash
+cd frontend
+npm run build:prod
+```
+
+O script do Google Analytics será injetado diretamente no `<head>` do HTML:
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+```
+
+**Importante**: O GTAG_ID deve estar configurado **antes** do build para ser injetado no HTML final.
 
 ## 🎨 Personalização
 

@@ -11,7 +11,7 @@ dotenv.config();
 
 /**
  * Carrega configuração do sistema
- * Prioridade: .env > /etc/rapport/genai-eng-prompt/config.json
+ * Prioridade: .env > /etc/genai-eng-prompt/config.json
  */
 class ConfigLoader {
   constructor() {
@@ -23,7 +23,7 @@ class ConfigLoader {
    * Carrega configuração de arquivo JSON
    */
   loadFromFile() {
-    const configPath = process.env.CONFIG_PATH || '/etc/rapport/genai-eng-prompt/config.json';
+    const configPath = process.env.CONFIG_PATH || '/etc/genai-eng-prompt/config.json';
     
     try {
       if (fs.existsSync(configPath)) {
@@ -58,6 +58,13 @@ class ConfigLoader {
     // Google Analytics
     if (process.env.GTAG_ID) {
       config.gtagId = process.env.GTAG_ID;
+    }
+
+    // Max Tokens
+    if (process.env.MAX_TOKENS) {
+      config.maxTokens = parseInt(process.env.MAX_TOKENS, 10);
+    } else {
+      config.maxTokens = 4000; // Valor padrão
     }
 
     // OpenAI
@@ -165,7 +172,7 @@ class ConfigLoader {
       return;
     }
 
-    throw new Error('Nenhuma configuração válida encontrada. Configure .env ou /etc/rapport/genai-eng-prompt/config.json');
+    throw new Error('Nenhuma configuração válida encontrada. Configure .env ou /etc/genai-eng-prompt/config.json');
   }
 
   /**
@@ -208,6 +215,13 @@ class ConfigLoader {
    */
   getGtagId() {
     return this.config?.gtagId || null;
+  }
+
+  /**
+   * Retorna o limite máximo de tokens
+   */
+  getMaxTokens() {
+    return this.config?.maxTokens || 4000;
   }
 
   /**

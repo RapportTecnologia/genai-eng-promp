@@ -39,7 +39,7 @@ services:
       - GENERATIVA_MODEL=${GENERATIVA_MODEL:-gpt-4}
     volumes:
       # Monta configurações externas (opcional)
-      - ./config:/etc/rapport/genai-eng-prompt:ro
+      - ./config:/etc/genai-eng-prompt:ro
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3010/api/health"]

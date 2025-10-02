@@ -52,7 +52,7 @@ class PerplexityEngine extends BaseEngine {
         model: this.model,
         messages,
         temperature: options.temperature || 0.7,
-        max_tokens: options.maxTokens || 4096
+        max_tokens: options.maxTokens || 4000
       });
 
       return response.data.choices[0].message.content;
@@ -113,7 +113,6 @@ Sugira continuações relevantes:`;
 
     return true;
   }
-<<<<<<< HEAD
 
   /**
    * Testa conexão com o provedor
@@ -172,8 +171,6 @@ Sugira continuações relevantes:`;
       };
     }
   }
-=======
->>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
 }
 
 export default PerplexityEngine;

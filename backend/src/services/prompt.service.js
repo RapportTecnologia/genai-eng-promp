@@ -48,7 +48,6 @@ Otimize o prompt do usuário aplicando essas técnicas. Mantenha a intenção or
 - Especificidade
 - Efetividade
 
-<<<<<<< HEAD
 IMPORTANTE: Retorne EXCLUSIVAMENTE o texto do prompt otimizado. NÃO inclua:
 - Explicações sobre as mudanças realizadas
 - Comentários ou observações
@@ -57,9 +56,6 @@ IMPORTANTE: Retorne EXCLUSIVAMENTE o texto do prompt otimizado. NÃO inclua:
 - Qualquer texto que não faça parte do prompt otimizado
 
 Responda SOMENTE com o prompt otimizado, nada mais.`;
-=======
-Retorne APENAS o prompt otimizado, sem explicações adicionais.`;
->>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
   }
 
   /**
@@ -74,6 +70,7 @@ Retorne APENAS o prompt otimizado, sem explicações adicionais.`;
       }
 
       const systemPrompt = this.getOptimizationSystemPrompt();
+      const maxTokens = configLoader.getMaxTokens();
       
       // Gera prompt otimizado
       const optimizedPrompt = await this.engine.generateCompletion(
@@ -82,10 +79,14 @@ Retorne APENAS o prompt otimizado, sem explicações adicionais.`;
         {
           temperature: 0.7,
 <<<<<<< HEAD
+<<<<<<< HEAD
           maxTokens: 4096
 =======
           maxTokens: 2000
 >>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
+=======
+          maxTokens: maxTokens
+>>>>>>> 2cbdfd58785182532b3e3b7517e52c01a341e499
         }
       );
 

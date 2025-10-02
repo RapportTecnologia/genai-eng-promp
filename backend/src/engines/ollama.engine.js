@@ -41,7 +41,7 @@ class OllamaEngine extends BaseEngine {
         stream: false,
         options: {
           temperature: options.temperature || 0.7,
-          num_predict: options.maxTokens || 4096
+          num_predict: options.maxTokens || 4000
         }
       });
 
@@ -141,7 +141,6 @@ Sugira continuações relevantes:`;
       return false;
     }
   }
-<<<<<<< HEAD
 
   /**
    * Testa conexão com o provedor
@@ -206,8 +205,6 @@ Sugira continuações relevantes:`;
       };
     }
   }
-=======
->>>>>>> 4d9df0b9cddd4289ba46442be7aaf7ad7fac51da
 }
 
 export default OllamaEngine;
